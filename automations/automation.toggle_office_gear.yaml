@@ -1,0 +1,27 @@
+id: '1705437643720'
+alias: Toggle daniel office gear
+description: ''
+trigger:
+- platform: device
+  domain: mqtt
+  device_id: 9f665ada5bcfbdb3c8679f4e669ccbea
+  type: action
+  subtype: single
+  discovery_id: 0x00158d00023e65a8 action_single
+condition: []
+action:
+- service: switch.toggle
+  target:
+    entity_id:
+    - switch.daniel_office_plug
+  data: {}
+- delay:
+    hours: 0
+    minutes: 0
+    seconds: 10
+    milliseconds: 0
+- service: light.turn_off
+  data: {}
+  target:
+    entity_id: light.daniel_office_lamp
+mode: single

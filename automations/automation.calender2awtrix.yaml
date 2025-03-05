@@ -1,0 +1,57 @@
+id: '1724962192903'
+alias: Calender2awtrix
+description: ''
+trigger:
+- platform: time_pattern
+  minutes: /15
+condition:
+- condition: time
+  after: 05:00:00
+action:
+- action: calendar.get_events
+  metadata: {}
+  data:
+    start_date_time: '{{ now().strftime(''%Y-%m-%d 00:00:00'') }}'
+    end_date_time: '{{ (now() + timedelta(days=2)).strftime(''%Y-%m-%d 00:00:00'')
+      }}'
+  target:
+    entity_id:
+    - calendar.home_assistant
+    - calendar.parro_agenda
+  response_variable: calendarEvents
+- variables:
+    sorted_events: "{% set calendars = ['calendar.home_assistant', 'calendar.parro_agenda']\
+      \ %} {% set ns = namespace(all_events=[]) %}\n{# Gather all upcoming events\
+      \ from both calendars #} {% for calendar in calendars %}\n  {% set events =\
+      \ calendarEvents[calendar].events %}\n  {% for e in events %}\n    {% if e.end\
+      \ | as_datetime | as_local > now() %}\n      {% set ns.all_events = ns.all_events\
+      \ + [e] %}\n    {% endif %}\n  {% endfor %}\n{% endfor %}\n{# Sort events by\
+      \ start time #} {% set sorted_events = ns.all_events | sort(attribute='start')\
+      \ %} {{ sorted_events }}\n"
+- if:
+  - condition: template
+    value_template: '{{ sorted_events | selectattr(''end'', ''>'', now().isoformat())
+      | list | count > 0 }}'
+  then:
+  - action: awtrix.awtrix_956278_push_app_data
+    metadata: {}
+    data:
+      name: calendar_today
+      data:
+        text: "{% set ns = namespace(msg=[]) %}\n{# Generate the output message #}\
+          \ {% set ns.msg = '' %} \n{% for e in sorted_events %}\n  {% set dt = e.start\
+          \ | as_datetime %}\n  {% if dt is not none %}\n    {% set dt_local = dt\
+          \ | as_local %}\n    {% set t = dt_local.strftime('%-H:%M') %}\n    \n \
+          \   {# Check if the event starts tomorrow #}\n    {% if dt_local.date()\
+          \ == (now() + timedelta(days=1)).date() %}\n      {% set t = '+1 ' ~ t %}\n\
+          \    {% endif %}\n    \n    {% set ns.msg = ns.msg ~ '{} - {} - '.format('All\
+          \ day' if t == \"0:00\" else t, e.summary) %} \n  {% endif %}\n{% endfor\
+          \ %}\n{{ ns.msg }}\n"
+        repeat: 2
+        icon: 10498
+  else:
+  - action: awtrix.awtrix_956278_push_app_data
+    metadata: {}
+    data:
+      name: calender_today
+mode: single

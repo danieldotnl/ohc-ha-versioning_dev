@@ -1,0 +1,44 @@
+id: '1709671068704'
+alias: Daily briefing
+description: ''
+triggers:
+- at: 07:00:00
+  trigger: time
+conditions: []
+actions:
+- target:
+    entity_id:
+    - calendar.home_assistant
+  data:
+    start_date_time: '{{ now().strftime(''%Y-%m-%d 00:00:00'') }}'
+    end_date_time: '{{ (now() + timedelta(days=1)).strftime(''%Y-%m-%d 00:00:00'')
+      }}'
+  response_variable: hacalender
+  enabled: true
+  action: calendar.get_events
+- data:
+    data:
+      url: /our-home/tech
+    title: Your daily briefing
+    message: "{%- set date = as_timestamp(now()) -%} {% set day = [\"Zondag\", \"\
+      Maandag\", \"Dinsdag\", \"Woensdag\", \"Donderdag\", \"Vrijdag\", \"Zaterdag\"\
+      ] %} {% set month = [\"Januari\", \"Februari\", \"Maart\", \"April\", \"Mei\"\
+      , \"Juni\", \"Juli\", \"Augustus\", \"September\", \"October\", \"November\"\
+      , \"December\"] %} {% set m_id = date | timestamp_custom(\"%m\") | int %} {%\
+      \ set g_id = date | timestamp_custom(\"%w\") | int %} {% set day_of_week = day[g_id]\
+      \ %}  {% set day_of_month = date | timestamp_custom(\"%d\") %} {% set month\
+      \ = month[m_id - 1] %}\nGoedemorgen! Het is vandaag {{ day_of_week }} {{ day_of_month\
+      \ }} {{ month }}. Buiten is het {{ states('sensor.mg_temperature') }} graden.\n\
+      {% if not is_state('sensor.cyclus_vandaag', 'Geen') %}\n  {% if is_state('sensor.cyclus_vandaag',\
+      \ 'gft') %}\nVandaag moet de groene container aan de weg gezet worden.\n  {%\
+      \ elif is_state('sensor.cyclus_vandaag', 'papier') %}\nVandaag moet de papier\
+      \ container aan de weg gezet worden.\n  {% elif is_state('sensor.cyclus_vandaag',\
+      \ 'pmd') %}\nVandaag moet het plastic buiten gezet worden.\n  {% elif is_state('sensor.cyclus_vandaag',\
+      \ 'restafval') %}\nVandaag moet de grijze container aan de weg gezet worden.\n\
+      \  {% endif %}\n{% endif %}\nYour agenda for today:  \n  {%- for key, value\
+      \ in hacalender.items() %}\n    {%- for event in value.events %}\n      - Summary:\
+      \ {{ event.summary }}\n      {%- if event.location is defined %}\n        Location:\
+      \ {{ event.location }}\n      {% endif -%}\n    {%- endfor %}\n  {%- endfor\
+      \ %}"
+  action: notify.mobile_app_iphone_drd6vjx62h
+mode: single

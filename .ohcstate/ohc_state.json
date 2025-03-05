@@ -1,0 +1,478 @@
+{
+  "automation.announce_message_from_mom_or_dad": {
+    "automation_id": "1736198727730",
+    "entity_id": "automation.announce_message_from_mom_or_dad",
+    "friendly_name": "Announce message from mom or dad on the speaker.",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.306206Z",
+    "state": "on"
+  },
+  "automation.awtrix_notify_person": {
+    "automation_id": "1724596059328",
+    "entity_id": "automation.awtrix_notify_person",
+    "friendly_name": "Awtrix notify person ",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.305658Z",
+    "state": "on"
+  },
+  "automation.baby_light": {
+    "automation_id": "1707055528895",
+    "entity_id": "automation.baby_light",
+    "friendly_name": "Baby light",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.301634Z",
+    "state": "on"
+  },
+  "automation.birthday2awtrix": {
+    "automation_id": "1724743255791",
+    "entity_id": "automation.birthday2awtrix",
+    "friendly_name": "Birthday2Awtrix",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.305733Z",
+    "state": "on"
+  },
+  "automation.calender2awtrix": {
+    "automation_id": "1724962192903",
+    "entity_id": "automation.calender2awtrix",
+    "friendly_name": "Calender2awtrix",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.305868Z",
+    "state": "on"
+  },
+  "automation.create_picnic_delivery_event_in_calendar": {
+    "automation_id": "1707053711706",
+    "entity_id": "automation.create_picnic_delivery_event_in_calendar",
+    "friendly_name": "Create picnic delivery event in calendar",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300582Z",
+    "state": "on"
+  },
+  "automation.critical_alert_when_water_sensor_triggers": {
+    "automation_id": "1707054102133",
+    "entity_id": "automation.critical_alert_when_water_sensor_triggers",
+    "friendly_name": "Critical alert when water sensor triggers",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300658Z",
+    "state": "on"
+  },
+  "automation.daily_bulletin": {
+    "automation_id": "1709671068704",
+    "entity_id": "automation.daily_bulletin",
+    "friendly_name": "Daily briefing",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.305491Z",
+    "state": "off"
+  },
+  "automation.daily_reset_speaker_volume_and_unmute_tts": {
+    "automation_id": "1707038773619",
+    "entity_id": "automation.daily_reset_speaker_volume_and_unmute_tts",
+    "friendly_name": "Daily reset speaker volume and unmute tts",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300362Z",
+    "state": "on"
+  },
+  "automation.doorbell_image_description": {
+    "automation_id": "1725526808645",
+    "entity_id": "automation.doorbell_image_description",
+    "friendly_name": "Doorbell image description",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.305937Z",
+    "state": "off"
+  },
+  "automation.example": {
+    "automation_id": "1725655338168",
+    "entity_id": "automation.example",
+    "friendly_name": "Describe doorbell clip",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.306001Z",
+    "state": "off"
+  },
+  "automation.flight_counter": {
+    "automation_id": "1705232983636",
+    "entity_id": "automation.flight_counter",
+    "friendly_name": "Flight counter",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299138Z",
+    "state": "on"
+  },
+  "automation.frigate_notifications_0_12_0_2": {
+    "automation_id": "1705915539361",
+    "entity_id": "automation.frigate_notifications_0_12_0_2",
+    "friendly_name": "Frigate Notifications (0.12.0.2)",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299585Z",
+    "state": "on"
+  },
+  "automation.ios_action_naar_huis": {
+    "automation_id": "1707383022760",
+    "entity_id": "automation.ios_action_naar_huis",
+    "friendly_name": "iOS action: naar huis",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.305400Z",
+    "state": "on"
+  },
+  "automation.ios_action_verwarming_aan": {
+    "automation_id": "1706992247327",
+    "entity_id": "automation.ios_action_verwarming_aan",
+    "friendly_name": "ios action: verwarming aan",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300297Z",
+    "state": "on"
+  },
+  "automation.keep_us_informed_about_strong_winds": {
+    "automation_id": "1707054329255",
+    "entity_id": "automation.keep_us_informed_about_strong_winds",
+    "friendly_name": "Keep us informed about strong winds",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300726Z",
+    "state": "on"
+  },
+  "automation.kitchen_switch_pushed": {
+    "automation_id": "1706564404305",
+    "entity_id": "automation.kitchen_switch_pushed",
+    "friendly_name": "Kitchen switch pushed",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300226Z",
+    "state": "on"
+  },
+  "automation.livingroom_lights_on_just_before_sunset": {
+    "automation_id": "1706556268392",
+    "entity_id": "automation.livingroom_lights_on_just_before_sunset",
+    "friendly_name": "Livingroom lights on just before sunset",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300015Z",
+    "state": "on"
+  },
+  "automation.noitify_about_high_aurora_activity": {
+    "automation_id": "1724761568558",
+    "entity_id": "automation.noitify_about_high_aurora_activity",
+    "friendly_name": "Notify about high aurora activity",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.305802Z",
+    "state": "on"
+  },
+  "automation.notify_about_low_cv_pressure": {
+    "automation_id": "1705433884087",
+    "entity_id": "automation.notify_about_low_cv_pressure",
+    "friendly_name": "Notify about low CV pressure",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299266Z",
+    "state": "on"
+  },
+  "automation.notify_daniel_about_multiscrape_and_measureit_users": {
+    "automation_id": "1705918233915",
+    "entity_id": "automation.notify_daniel_about_multiscrape_and_measureit_users",
+    "friendly_name": "Notify daniel about multiscrape and measureit users",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299662Z",
+    "state": "on"
+  },
+  "automation.notify_daniel_when_a_new_device_connects_wifi": {
+    "automation_id": "1707038995003",
+    "entity_id": "automation.notify_daniel_when_a_new_device_connects_wifi",
+    "friendly_name": "Notify Daniel when a new device connects wifi",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300433Z",
+    "state": "on"
+  },
+  "automation.notify_me_when_cv_peaks_above_3_bar": {
+    "automation_id": "1707054394071",
+    "entity_id": "automation.notify_me_when_cv_peaks_above_3_bar",
+    "friendly_name": "Notify me when CV peaks above 3 bar",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300795Z",
+    "state": "on"
+  },
+  "automation.notify_of_garbage_collection_today": {
+    "automation_id": "1707054415603",
+    "entity_id": "automation.notify_of_garbage_collection_today",
+    "friendly_name": "Notify of garbage collection today",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300863Z",
+    "state": "on"
+  },
+  "automation.notify_on_tv_when_person_detected_in_front_yard": {
+    "automation_id": "1733173667980",
+    "entity_id": "automation.notify_on_tv_when_person_detected_in_front_yard",
+    "friendly_name": "Notify on tv when person detected in front yard",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.306141Z",
+    "state": "on"
+  },
+  "automation.notify_train_delay": {
+    "automation_id": "1726777212386",
+    "entity_id": "automation.notify_train_delay",
+    "friendly_name": "Notify train delay",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.306071Z",
+    "state": "on"
+  },
+  "automation.notify_us_when_doorbell_rings": {
+    "automation_id": "1705919941116",
+    "entity_id": "automation.notify_us_when_doorbell_rings",
+    "friendly_name": "Notify us when doorbell rings",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299733Z",
+    "state": "on"
+  },
+  "automation.notify_us_when_washing_machine_is_finished": {
+    "automation_id": "1707054447663",
+    "entity_id": "automation.notify_us_when_washing_machine_is_finished",
+    "friendly_name": "Notify us when washing machine is finished",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300933Z",
+    "state": "on"
+  },
+  "automation.notify_when_robby_is_finished": {
+    "automation_id": "1707054491472",
+    "entity_id": "automation.notify_when_robby_is_finished",
+    "friendly_name": "Notify when robby is finished",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.301004Z",
+    "state": "on"
+  },
+  "automation.notify_when_window_is_open_when_leaving": {
+    "automation_id": "1707054536217",
+    "entity_id": "automation.notify_when_window_is_open_when_leaving",
+    "friendly_name": "Notify when window is open when leaving",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.301076Z",
+    "state": "on"
+  },
+  "automation.power2awtrix": {
+    "automation_id": "1724422056001",
+    "entity_id": "automation.power2awtrix",
+    "friendly_name": "Power2Awtrix",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.305580Z",
+    "state": "on"
+  },
+  "automation.run_good_morning_scripts_when_we_come_down": {
+    "automation_id": "1706128045873",
+    "entity_id": "automation.run_good_morning_scripts_when_we_come_down",
+    "friendly_name": "Run good morning scripts when we come down",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299946Z",
+    "state": "on"
+  },
+  "automation.set_us_status": {
+    "automation_id": "1707054716683",
+    "entity_id": "automation.set_us_status",
+    "friendly_name": "Set us status",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.301145Z",
+    "state": "on"
+  },
+  "automation.switch_off_heating_when_nobody_home": {
+    "automation_id": "1707054832228",
+    "entity_id": "automation.switch_off_heating_when_nobody_home",
+    "friendly_name": "Switch off heating when nobody home",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.301213Z",
+    "state": "on"
+  },
+  "automation.switch_off_office_gear_during_night": {
+    "automation_id": "1705437825040",
+    "entity_id": "automation.switch_off_office_gear_during_night",
+    "friendly_name": "Switch off office gear during night",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299498Z",
+    "state": "on"
+  },
+  "automation.switch_on_front_door_light_after_sunset": {
+    "automation_id": "1707054861963",
+    "entity_id": "automation.switch_on_front_door_light_after_sunset",
+    "friendly_name": "Switch on front door light after sunset ",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.301281Z",
+    "state": "on"
+  },
+  "automation.switch_on_hall_light_temporarily_on_motion": {
+    "automation_id": "1705437441560",
+    "entity_id": "automation.switch_on_hall_light_temporarily_on_motion",
+    "friendly_name": "Switch on hall light temporarily on motion",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299354Z",
+    "state": "on"
+  },
+  "automation.switch_on_overloop_on_dark_mornings": {
+    "automation_id": "1706126290523",
+    "entity_id": "automation.switch_on_overloop_on_dark_mornings",
+    "friendly_name": "Switch on overloop on dark mornings",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299804Z",
+    "state": "on"
+  },
+  "automation.toggle_office_gear": {
+    "automation_id": "1705437643720",
+    "entity_id": "automation.toggle_office_gear",
+    "friendly_name": "Toggle daniel office gear",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299426Z",
+    "state": "on"
+  },
+  "automation.turn_off_lights_during_day": {
+    "automation_id": "1706556536535",
+    "entity_id": "automation.turn_off_lights_during_day",
+    "friendly_name": "Turn off lights during day",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300158Z",
+    "state": "on"
+  },
+  "automation.turn_off_living_room_lights_during_night": {
+    "automation_id": "1706556459260",
+    "entity_id": "automation.turn_off_living_room_lights_during_night",
+    "friendly_name": "Turn off living room lights during night",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300091Z",
+    "state": "on"
+  },
+  "automation.turn_on_heating_when_coming_home_early": {
+    "automation_id": "1707039098819",
+    "entity_id": "automation.turn_on_heating_when_coming_home_early",
+    "friendly_name": "Turn on heating when coming home early",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.300501Z",
+    "state": "on"
+  },
+  "automation.turn_on_overloop_light_after_sunset": {
+    "automation_id": "1706126432721",
+    "entity_id": "automation.turn_on_overloop_light_after_sunset",
+    "friendly_name": "Turn on overloop light after sunset",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.299875Z",
+    "state": "on"
+  },
+  "automation.update_energy_tariffs": {
+    "automation_id": "1707055017934",
+    "entity_id": "automation.update_energy_tariffs",
+    "friendly_name": "Update energy tariffs",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.301346Z",
+    "state": "on"
+  },
+  "automation.update_here_travel_time_when_traveling": {
+    "automation_id": "1736343792293",
+    "entity_id": "automation.update_here_travel_time_when_traveling",
+    "friendly_name": "Update HERE travel time when traveling ",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.306276Z",
+    "state": "on"
+  },
+  "automation.voice_assistant_volume_ducking": {
+    "automation_id": "1736518834465",
+    "entity_id": "automation.voice_assistant_volume_ducking",
+    "friendly_name": "Voice assistant volume ducking",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.306339Z",
+    "state": "off"
+  },
+  "automation.warn_about_temperature_diff": {
+    "automation_id": "1707055050897",
+    "entity_id": "automation.warn_about_temperature_diff",
+    "friendly_name": "Warn about temperature diff",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.301418Z",
+    "state": "on"
+  },
+  "automation.warn_us_when_the_plants_needs_water": {
+    "automation_id": "1707055117832",
+    "entity_id": "automation.warn_us_when_the_plants_needs_water",
+    "friendly_name": "Warn us when the plants needs water",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.301483Z",
+    "state": "on"
+  },
+  "automation.warn_when_window_open_in_rain": {
+    "automation_id": "1707055154177",
+    "entity_id": "automation.warn_when_window_open_in_rain",
+    "friendly_name": "Warn when window open in rain",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:54.301553Z",
+    "state": "on"
+  },
+  "script.create_calendar_event": {
+    "entity_id": "script.create_calendar_event",
+    "friendly_name": "Create calendar event",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.963413Z",
+    "state": "off"
+  },
+  "script.describe_doorbell_image": {
+    "entity_id": "script.describe_doorbell_image",
+    "friendly_name": "Describe what happens outside",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.962415Z",
+    "state": "off"
+  },
+  "script.get_shopping_list_items": {
+    "entity_id": "script.get_shopping_list_items",
+    "friendly_name": "Get shopping list items",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.963759Z",
+    "state": "off"
+  },
+  "script.going_to_sleep": {
+    "entity_id": "script.going_to_sleep",
+    "friendly_name": "Going to sleep",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.962256Z",
+    "state": "off"
+  },
+  "script.good_morning": {
+    "entity_id": "script.good_morning",
+    "friendly_name": "Good morning",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.962075Z",
+    "state": "off"
+  },
+  "script.listen_to_music_or_radio": {
+    "entity_id": "script.listen_to_music_or_radio",
+    "friendly_name": "Listen to music or radio",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.963587Z",
+    "state": "off"
+  },
+  "script.llm_helper_script_for_fetching_weather_forecasts": {
+    "entity_id": "script.llm_helper_script_for_fetching_weather_forecasts",
+    "friendly_name": "LLM Helper script for fetching weather forecasts",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.962618Z",
+    "state": "off"
+  },
+  "script.send_a_message_to_somone": {
+    "entity_id": "script.send_a_message_to_somone",
+    "friendly_name": "Send a message to someone",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.963100Z",
+    "state": "off"
+  },
+  "script.send_robby_the_vacuum_robot_to_the_kitchen": {
+    "entity_id": "script.send_robby_the_vacuum_robot_to_the_kitchen",
+    "friendly_name": "Send robby the vacuum robot to the kitchen",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.962928Z",
+    "state": "off"
+  },
+  "script.vacuum_floor_or_rooms": {
+    "entity_id": "script.vacuum_floor_or_rooms",
+    "friendly_name": "Vacuum floor or rooms",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.963253Z",
+    "state": "off"
+  },
+  "script.vacuum_selected_rooms": {
+    "entity_id": "script.vacuum_selected_rooms",
+    "friendly_name": "Vacuum selected rooms",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.961843Z",
+    "state": "off"
+  },
+  "script.warm_up_the_car": {
+    "entity_id": "script.warm_up_the_car",
+    "friendly_name": "Warm up the car",
+    "is_deleted": false,
+    "last_changed": "2025-03-05T20:13:46.962776Z",
+    "state": "off"
+  }
+}

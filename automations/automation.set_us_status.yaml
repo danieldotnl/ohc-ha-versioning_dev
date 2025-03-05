@@ -1,0 +1,21 @@
+id: '1707054716683'
+alias: Set us status
+description: ''
+trigger:
+- platform: state
+  entity_id: group.us
+condition: []
+action:
+- choose:
+  - conditions:
+    - condition: state
+      entity_id: group.us
+      state: away
+    sequence:
+    - service: input_select.select_option
+      target:
+        entity_id: input_select.us_status
+      data:
+        option: away
+  default: []
+mode: single

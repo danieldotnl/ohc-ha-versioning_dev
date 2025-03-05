@@ -1,0 +1,40 @@
+id: '1707055528895'
+alias: Baby light
+description: ''
+trigger:
+- platform: device
+  domain: mqtt
+  device_id: 938b6e96e08111fe894c6e9d45cc7c74
+  type: action
+  subtype: single
+  discovery_id: 0x00158d000799de40 action_single
+condition: []
+action:
+- choose:
+  - conditions:
+    - condition: state
+      entity_id: light.slaapkamer_lamp
+      state: 'off'
+    sequence:
+    - service: light.turn_on
+      data:
+        brightness: 115
+      target:
+        entity_id: light.slaapkamer_lamp
+  - conditions:
+    - condition: template
+      value_template: '{{ is_state(''light.slaapkamer_lamp'', ''on'') and state_attr(''light.slaapkamer_lamp'',
+        ''brightness'')  < 65 }}'
+    sequence:
+    - service: light.turn_on
+      data:
+        brightness: 115
+      target:
+        entity_id: light.slaapkamer_lamp
+  default:
+  - service: light.turn_on
+    data:
+      brightness: 18
+    target:
+      entity_id: light.slaapkamer_lamp
+mode: single

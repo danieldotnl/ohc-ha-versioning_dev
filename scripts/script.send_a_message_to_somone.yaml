@@ -1,0 +1,36 @@
+sequence:
+- action: "{% if recipient in ['papa', 'daniel'] %}\n  notify.mobile_app_iphone_drd6vjx62h\n\
+    {% elif recipient in ['mama', 'anca'] %}\n  notify.mobile_app_iphone\n{% endif\
+    \ %}"
+  metadata: {}
+  data:
+    message: '{{ message }}'
+    title: Bericht van thuis
+    data:
+      tag: REPLY_MESSAGE_FROM_HOME
+      actions:
+      - action: kids_message
+        title: Reply to the message
+        behavior: textInput
+fields:
+  recipient:
+    selector:
+      select:
+        options:
+        - papa
+        - mama
+        - anca
+        - daniel
+    name: recipient
+    description: The person to send the messaget o
+    required: true
+    default: papa
+  message:
+    selector:
+      text: null
+    name: message
+    description: The message to send to the recipient
+alias: Send a message to someone
+description: This script can be used by an LLM to send a text message to a recipient,
+  which can be one of 'papa', 'mama', 'daniel', 'anca'. The message can be no longer
+  than an iOS notification.

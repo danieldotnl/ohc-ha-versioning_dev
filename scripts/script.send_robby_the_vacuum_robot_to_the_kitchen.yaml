@@ -1,0 +1,33 @@
+sequence:
+- if:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.active_vacuum_map
+      state: downstairs
+  then:
+  - action: vacuum.send_command
+    metadata: {}
+    data:
+      command: load_multi_map
+      params: 2
+    target:
+      entity_id: vacuum.robby
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 4
+- action: vacuum.send_command
+  metadata: {}
+  data:
+    command: app_goto_target
+    params:
+    - 26473
+    - 33259
+  target:
+    entity_id: vacuum.robby
+- stop: ''
+alias: Send robby the vacuum robot to the kitchen
+description: This script will send the vacuum robot called robby to the ktichen so
+  we can empty the bin or fill the water tank and prepare it for a new run. It cannot
+  be used to vacuum a floor or rooms.

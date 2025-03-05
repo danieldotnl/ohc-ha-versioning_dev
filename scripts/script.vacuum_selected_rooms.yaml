@@ -1,0 +1,25 @@
+alias: Vacuum selected rooms
+sequence:
+- data:
+    command: app_segment_clean
+    params:
+    - repeat: '{{ repeat }}'
+      segments: "{% if is_state('sensor.active_vacuum_map', 'downstairs') %}\n  {%\
+        \ set rooms = [ states('input_boolean.vacuum_hall'), states('input_boolean.vacuum_living_room'),\
+        \ states('input_boolean.vacuum_kitchen') ]  %}\n  {% set roomids = [2, 16,\
+        \ 17] %}\n  {% set ns = namespace (selectedids=[]) %}\n  {% for i in rooms\
+        \ %}\n    {% if i == 'on' %}\n      {% set ns.selectedids = ns.selectedids\
+        \ + [roomids[loop.index-1] | int] %}\n    {% endif %}\n  {% endfor%}\n  {%\
+        \ if ns.selectedids | count == 0 %}\n    {{ roomids }}\n  {% else %}\n   \
+        \ {{ ns.selectedids }}\n  {% endif %}\n\n{% else %}\n\n  {% set rooms = expand('input_boolean.vacuum_anna_room',\
+        \ 'input_boolean.vacuum_alex_room', 'input_boolean.vacuum_bathroom', 'input_boolean.vacuum_bedroom',\
+        \ 'input_boolean.vacuum_overloop') | map(attribute='state') | list %}\n  {%\
+        \ set roomids = [16, 17, 18, 19, 20] %}\n  {% set ns = namespace (selectedids=[])\
+        \ %}\n  {% for i in rooms %}\n    {% if i == 'on' %}\n      {% set ns.selectedids\
+        \ = ns.selectedids + [roomids[loop.index-1] | int] %}\n    {% endif %}\n \
+        \ {% endfor%}\n  {% if ns.selectedids | count == 0 %}\n    {{ roomids }}\n\
+        \  {% else %}\n    {{ ns.selectedids }}\n  {% endif %}\n{% endif %}\n"
+  target:
+    entity_id: vacuum.robby
+  action: vacuum.send_command
+mode: restart

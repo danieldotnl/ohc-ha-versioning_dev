@@ -1,0 +1,67 @@
+alias: Going to sleep
+description: This script should be run when we are going to sleep, in order to prepare
+  the home for the night.
+sequence:
+- data: {}
+  target:
+    entity_id:
+    - light.woonkamer_lampen
+    - light.eettafel_lamp
+    - light.living_room_reading_lamp
+  action: light.turn_off
+- if:
+  - condition: template
+    value_template: '{{ not is_state(''sensor.anca_status'', ''Asleep'') or is_state(''sensor.daniel_status'',
+      ''Asleep'') }}'
+  then:
+  - data:
+      transition: 2
+    target:
+      entity_id: scene.bedroom_dimmed
+    action: scene.turn_on
+  enabled: false
+- data:
+    entity_id: media_player.speaker
+    message: "Tijd om naar bed te gaan! Buiten is het {{ states('sensor.mg_temperature')\
+      \ }} graden.\n{% set delta = (as_timestamp(state_attr('calendar.ha_birthdays',\
+      \ 'start_time')) - as_timestamp(now())) | timestamp_custom(\"%j\") | int  %}\
+      \ {% if delta == 1 %}\n  Denk er aan, morgen is {{ state_attr('calendar.ha_birthdays',\
+      \ 'message') }} jarig!\n{% endif %}\n{% if is_state('lock.niro_ev_door_lock',\
+      \ 'unlocked') %}\n  Let op, let op, let op: de auto is niet op slot! Ik probeer\
+      \ nu de auto op slot te doen.\n{% endif %}\n{% if not is_state('sensor.cyclus_morgen',\
+      \ 'None') %}\n    {% if is_state('sensor.cyclus_morgen', 'gft') %}\n  Morgen\
+      \ wordt de groene container geleegd.\n    {% elif is_state('sensor.cyclus_morgen',\
+      \ 'papier') %}\n  Morgen wordt het oud papier opgehaald.\n    {% elif is_state('sensor.cyclus_morgen',\
+      \ 'pmd') %}\n  Morgen wordt het plastic opgehaald.\n    {% elif is_state('sensor.cyclus_morgen',\
+      \ 'restafval') %}\n  Morgen wordt de grijze container geleegd.\n    {% endif\
+      \ %}\n  {% endif %}\n  \n{% if is_state('binary_sensor.washingmachine', 'on')\
+      \ %}\n  Let op, de wasmachine draait nog!\n{% endif %}\n{% if states('sensor.iphone_battery_level')\
+      \ | float < 30 %}\n  Anca, vergeet je telefoon niet op te laden, de batterij\
+      \ is nog maar {{ states('sensor.iphone_battery_level') }} procent.\n{% endif\
+      \ %}\n{% if states('sensor.niro_ev_ev_battery_level') | float < 60 and is_state('binary_sensor.niro_ev_plugged_in',\
+      \ 'off') %}\n  Daniel, wil je de auto nog opladen? De accu is nog maar {{ states('sensor.niro_ev_ev_battery')\
+      \ }} procent.\n{% endif %}\n{% if is_state('sensor.moon_phase', 'full_moon')\
+      \ %}\n  Kijk nog even naar buiten, het is volle maan.\n{% endif %}\nWelterusten\
+      \ en lekker knuffelen!\n"
+    language: nl-NL
+  enabled: true
+  action: tts.cloud_say
+- if:
+  - condition: state
+    entity_id: lock.niro_ev_door_lock
+    state: unlocked
+  then:
+  - data: {}
+    target:
+      entity_id: lock.niro_ev_door_lock
+    action: lock.lock
+- target:
+    entity_id: climate.nefiteasy
+  data:
+    temperature: '{{ states(''input_number.night_temperature'') }}'
+  action: climate.set_temperature
+- type: turn_off
+  device_id: ec4c541e1c1caa886cae1adddb885813
+  entity_id: d7a17277b2d8f14a0bf2673a79b5b84f
+  domain: switch
+mode: single

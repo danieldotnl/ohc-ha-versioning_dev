@@ -1,0 +1,30 @@
+id: '1733173667980'
+alias: Notify on tv when person detected in front yard
+description: ''
+triggers:
+- trigger: state
+  entity_id:
+  - binary_sensor.front_yard_person_occupancy
+  to: 'on'
+conditions:
+- condition: state
+  entity_id: media_player.tv
+  state: 'on'
+actions:
+- action: camera.snapshot
+  metadata: {}
+  data:
+    filename: /config/www/doorbell.jpg
+  target:
+    entity_id: camera.doorbell
+- action: notify.tv_notifications
+  metadata: {}
+  data:
+    message: Er is iemand in de voortuin!
+    title: Persoon gedetecteerd
+    data:
+      fontsize: large
+      duration: 8
+      transparency: 50%
+      image: http://homeassistant2:8123/local/doorbell.jpg
+mode: single

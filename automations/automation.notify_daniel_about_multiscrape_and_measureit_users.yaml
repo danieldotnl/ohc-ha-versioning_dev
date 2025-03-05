@@ -1,0 +1,15 @@
+id: '1705918233915'
+alias: Notify daniel about multiscrape and measureit users
+description: ''
+trigger:
+- platform: time
+  at: 09:30:00
+condition: []
+action:
+- service: notify.mobile_app_iphone_drd6vjx62h
+  data:
+    message: There are now {{ states('sensor.multiscrape_total_usage') }} people using
+      Multiscrape and {{ states('sensor.measureit_total_usage') }} people using MeasureIt!
+    title: Report on Multiscrape and MeasureIt users
+mode: queued
+max: 10

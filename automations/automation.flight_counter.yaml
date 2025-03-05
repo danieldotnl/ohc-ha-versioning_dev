@@ -1,0 +1,14 @@
+id: '1705232983636'
+alias: Flight counter
+description: ''
+trigger:
+- platform: event
+  event_type: flightradar24_entry
+condition: []
+action:
+- service: counter.increment
+  metadata: {}
+  data: {}
+  target:
+    entity_id: counter.flights_in_area
+mode: single

@@ -1,0 +1,16 @@
+id: '1706992247327'
+alias: 'ios action: verwarming aan'
+description: ''
+trigger:
+- platform: event
+  event_type: ios.action_fired
+  event_data:
+    actionName: Verwarming aan
+condition: []
+action:
+- service: climate.set_temperature
+  target:
+    entity_id: climate.nefiteasy
+  data:
+    temperature: 19
+mode: single

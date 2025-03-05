@@ -1,0 +1,48 @@
+id: '1726777212386'
+alias: Notify train delay
+description: ''
+triggers:
+- trigger: state
+  entity_id:
+  - sensor.gouda_rotterdam
+conditions:
+- condition: time
+  after: 08:00:00
+  before: 09:30:00
+  weekday:
+  - tue
+  - fri
+- condition: state
+  entity_id: sensor.gouda_rotterdam
+  attribute: departure_delay
+  state: true
+actions:
+- if:
+  - condition: state
+    entity_id: sensor.gouda_rotterdam
+    attribute: going
+    state: true
+  then:
+  - variables:
+      delay: "{{ ((strptime(state_attr('sensor.gouda_rotterdam', 'departure_time_actual'),\
+        \ '%H:%M') - strptime(state_attr('sensor.gouda_rotterdam', 'departure_time_planned'),\
+        \ '%H:%M')).total_seconds() / 60) | int  }}      \n"
+  - if:
+    - condition: template
+      value_template: '{{ delay > 4 }}'
+    then:
+    - action: notify.notify_us
+      metadata: {}
+      data:
+        message: "De trein van {{ states('sensor.gouda_rotterdam') }} naar Rotterdam\
+          \ heeft {{ delay }} minuten vertraging \U0001FAE4.\n"
+        title: NS
+  else:
+  - action: notify.notify_us
+    metadata: {}
+    data:
+      message: "De trein van {{ states('sensor.gouda_rotterdam') }} naar Rotterdam\
+        \ is geannuleerd \U0001F62B. De volgende trein is om {{ state_attr('sensor.gouda_rotterdam',\
+        \ 'next') }}.\n"
+      title: NS
+mode: single

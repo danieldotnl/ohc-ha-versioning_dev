@@ -1,0 +1,21 @@
+id: '1705915539361'
+alias: Frigate Notifications (0.12.0.2)
+description: ''
+use_blueprint:
+  path: SgtBatten/Stable.yaml
+  input:
+    camera: camera.doorbell
+    notify_device: 9a67a42b19ef5cfdc8909a41d29016f8
+    base_url: https://900kydstgx95xh1ul0h2lprakt51e4do.ui.nabu.casa
+    message: Er is een persoon in de voortuin gedetecteerd.
+    alert_once: true
+    attachment: thumbnail
+    update_thumbnail: true
+    icon: mdi:cctv
+    ios_live_view: true
+    zone_filter: true
+    zones:
+    - front_yard
+    labels:
+    - person
+    button_1: View recording

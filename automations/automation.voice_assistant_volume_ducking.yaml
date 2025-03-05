@@ -1,0 +1,7 @@
+id: '1736518834465'
+alias: Voice assistant volume ducking
+description: ''
+use_blueprint:
+  path: luka6000/HA_Voice_room_MP_volume.yaml
+  input:
+    assist: assist_satellite.home_assistant_voice_096725_assist_satellite

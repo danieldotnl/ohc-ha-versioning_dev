@@ -1,0 +1,17 @@
+id: '1705433884087'
+alias: Notify about low CV pressure
+description: ''
+triggers:
+- trigger: time
+  at: '15:32:00'
+conditions:
+- below: '1.6'
+  condition: numeric_state
+  entity_id: sensor.nefiteasy_system_pressure
+actions:
+- data:
+    message: De druk van de CV is {{ states('sensor.nefiteasy_system_pressure') }}
+      bar, snel bijvullen!
+    title: CV installatie bijvullen
+  action: notify.mobile_app_iphone_drd6vjx62h
+mode: single

@@ -1,0 +1,6 @@
+alias: LLM Helper script for fetching weather forecasts
+use_blueprint:
+  path: TheFes/fetch_weather_forecast_by_llm.yaml
+  input:
+    weather_entity: weather.tomorrow_io_home_daily
+description: ''

@@ -1,0 +1,20 @@
+id: '1706128045873'
+alias: Run good morning scripts when we come down
+description: ''
+trigger:
+- platform: state
+  entity_id:
+  - binary_sensor.gang_motion_occupancy
+  from: 'off'
+  to: 'on'
+condition:
+- condition: template
+  value_template: '{{ as_timestamp(state_attr(''automation.run_good_morning_scripts_when_we_come_down'',
+    ''last_triggered'')) | timestamp_custom(''%Y-%m-%d'') != states(''sensor.date'')
+    }}'
+- condition: time
+  after: 05:00:00
+action:
+- service: script.good_morning
+  data: {}
+mode: single

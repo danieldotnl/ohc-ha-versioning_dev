@@ -1,0 +1,22 @@
+id: '1705437825040'
+alias: Switch off office gear during night
+description: ''
+trigger:
+- platform: time
+  at: '23:30:00'
+condition:
+- condition: state
+  entity_id: switch.daniel_office_plug
+  state: 'on'
+action:
+- service: light.turn_off
+  data: {}
+  target:
+    entity_id:
+    - light.daniel_office_lamp
+- service: switch.turn_off
+  data: {}
+  target:
+    entity_id:
+    - switch.daniel_office_plug
+mode: single

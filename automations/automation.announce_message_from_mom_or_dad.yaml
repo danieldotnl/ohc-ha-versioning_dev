@@ -1,0 +1,17 @@
+id: '1736198727730'
+alias: Announce message from mom or dad on the speaker.
+description: ''
+triggers:
+- trigger: event
+  event_type: mobile_app_notification_action
+  event_data:
+    action: kids_message
+conditions: []
+actions:
+- action: notify.announcements
+  data:
+    message: '{{ reply_message }}'
+variables:
+  notification_tag: '{{ trigger.event.data.tag }}'
+  reply_message: '{{ trigger.event.data.reply_text }}'
+mode: single

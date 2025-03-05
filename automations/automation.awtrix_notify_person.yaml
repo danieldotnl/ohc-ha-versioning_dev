@@ -1,0 +1,17 @@
+id: '1724596059328'
+alias: 'Awtrix notify person '
+description: ''
+trigger:
+- platform: state
+  entity_id:
+  - binary_sensor.front_yard_person_occupancy
+condition: []
+action:
+- action: notify.awtrix_956278
+  data:
+    message: Person detected in front yard
+    data:
+      icon: 60362
+      repeat: 1
+      rtttl: two_short:d=4,o=5,b=100:16e6,16e6
+mode: single

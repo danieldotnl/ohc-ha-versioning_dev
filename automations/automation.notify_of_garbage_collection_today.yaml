@@ -1,0 +1,18 @@
+id: '1707054415603'
+alias: Notify of garbage collection today
+description: ''
+trigger:
+- at: '8:00'
+  platform: time
+condition:
+- condition: template
+  value_template: '{{ not is_state(''sensor.cyclus_vandaag'', ''Geen'') }}'
+action:
+- data_template:
+    message: "{% if is_state('sensor.cyclus_vandaag', 'restafval') %}\n  Vandaag wordt\
+      \ de grijze container opgehaald.\n{% elif is_state('sensor.cyclus_vandaag',\
+      \ 'pmd') %}\n  Vandaag wordt er plastic opgehaald.\n{% elif is_state('sensor.cyclus_vandaag',\
+      \ 'papier') %}\n  Vandaag wordt de papiercontainer opgehaald.\n{% elif is_state('sensor.cyclus_vandaag',\
+      \ 'gft') %}\n  Vandaag wordt de groene container opgehaald.\n{% endif %}\n"
+    title: Container aan de weg zetten
+  service: notify.notify_us

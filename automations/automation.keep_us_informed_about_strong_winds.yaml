@@ -1,0 +1,22 @@
+id: '1707054329255'
+alias: Keep us informed about strong winds
+description: ''
+trigger:
+- entity_id: sensor.mg_max_wind_speed
+  platform: state
+condition:
+- above: '3'
+  condition: numeric_state
+  entity_id: sensor.mg_wind_beaufort
+action:
+- service: notify.notify_us
+  data:
+    message: 'Hardste windstoot tot nu toe: {{ states("sensor.mg_max_wind_speed")
+      }}.'
+    title: Het waait behoorlijk!
+- service: tts.cloud_say
+  data:
+    message: Hardste windstoot tot nu toe {{ states("sensor.mg_max_wind_speed") }}.
+    entity_id: media_player.speaker
+    language: nl-NL
+mode: single

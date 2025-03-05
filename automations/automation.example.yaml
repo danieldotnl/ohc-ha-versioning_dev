@@ -1,0 +1,57 @@
+id: '1725655338168'
+alias: Describe doorbell clip
+description: ''
+trigger:
+- platform: mqtt
+  topic: frigate/events
+  variables:
+    after_zones: '{{ trigger.payload_json[''after''][''entered_zones''] }}'
+    before_zones: '{{ trigger.payload_json[''before''][''entered_zones''] }}'
+    camera: '{{ trigger.payload_json[''after''][''camera''] }}'
+    id: '{{ trigger.payload_json[''after''][''id''] }}'
+    label: '{{ trigger.payload_json[''after''][''label''] }}'
+    score: '{{ trigger.payload_json[''after''][''score''] }}'
+    time_clip_start: '{{ trigger.payload_json[''after''][''start_time''] - 10.0 }}'
+    message_type: '{{trigger.payload_json[''type''] }}'
+condition:
+- condition: template
+  value_template: '{{ message_type == ''end'' }}'
+- condition: or
+  conditions:
+  - condition: time
+    before: 06:00:00
+  - condition: template
+    value_template: '{{ ''front_yard'' in after_zones }}'
+action:
+- metadata: {}
+  data:
+    provider: OpenAI
+    model: gpt-4o-mini
+    message: Very briefly describe in dutch, what you see happening in this clip from
+      my doorbell camera. Your message needs to be short to fit in a phone notification.
+      The camera looks at the front_yard with a street directly in front of it. At
+      the other side of the street you can see the houses of the neighbors. Do not
+      describe stationary objects or buildings.
+    interval: 3
+    include_filename: false
+    target_width: 1280
+    detail: high
+    max_tokens: 100
+    temperature: 0.3
+    event_id: '{{ id }}'
+  response_variable: response
+  action: llmvision.video_analyzer
+- action: notify.mobile_app_iphone_drd6vjx62h
+  metadata: {}
+  data:
+    message: '{{ response.response_text }}'
+    title: 'Voortuin event: {{ label }} - {{ score }}'
+    data:
+      when: '{{trigger.payload_json["after"]["start_time"]|int}}'
+- action: input_text.set_value
+  metadata: {}
+  data:
+    value: '{{ response.response_text }}'
+  target:
+    entity_id: input_text.llm_vision_video
+mode: single

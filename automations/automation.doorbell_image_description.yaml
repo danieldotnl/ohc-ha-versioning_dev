@@ -1,0 +1,49 @@
+id: '1725526808645'
+alias: Doorbell image description
+description: ''
+triggers:
+- topic: frigate/events
+  payload: doorbell/new
+  value_template: '{{ value_json[''after''][''camera''] | lower | replace(''-'',''_'')
+    }}/{{ value_json[''type'']}}'
+  id: frigate-event
+  enabled: true
+  variables:
+    after_zones: '{{ trigger.payload_json[''after''][''entered_zones''] }}'
+    before_zones: '{{ trigger.payload_json[''before''][''entered_zones''] }}'
+    camera: '{{ trigger.payload_json[''after''][''camera''] }}'
+    id: '{{ trigger.payload_json[''after''][''id''] }}'
+    label: '{{ trigger.payload_json[''after''][''label''] }}'
+    score: '{{ trigger.payload_json[''after''][''score''] }}'
+    time_clip_start: '{{ trigger.payload_json[''after''][''start_time''] - 10.0 }}'
+  trigger: mqtt
+conditions:
+- condition: template
+  value_template: "{% set time = states('sensor.time') %}\n{% if time < '06:00' %}\n\
+    \  True\n{% else %}\n  {{ 'front_yard' in after_zones }}\n{% endif %}\n  \n"
+actions:
+- action: llmvision.image_analyzer
+  metadata: {}
+  data:
+    provider: 01J6ZD9D4870Q87A59KWJC1J9F
+    model: gpt-4o-mini
+    target_width: 1280
+    max_tokens: 100
+    temperature: 0.5
+    message: Very briefly describe in dutch, what you see in this image from my doorbell
+      camera. Your message needs to be short to fit in a phone notification. Don't
+      describe stationary objects or buildings.
+    image_entity:
+    - camera.doorbell
+  response_variable: response
+- action: notify.mobile_app_iphone_drd6vjx62h
+  metadata: {}
+  data:
+    message: '{{ response.response_text }}'
+    title: Voortuin event
+    data:
+      when: '{{trigger.payload_json["after"]["start_time"]|int}}'
+      entity_id: camera.{{trigger.payload_json["after"]["camera"] | replace("-","_")
+        | lower}}
+mode: queued
+max: 10

@@ -1,0 +1,12 @@
+sequence:
+- action: todo.get_items
+  target:
+    entity_id: todo.shopping_list
+  data:
+    status: needs_action
+  response_variable: response
+- stop: ''
+  response_variable: response
+alias: Get shopping list items
+description: This script should be used to list the items that are currently on the
+  shopping list.

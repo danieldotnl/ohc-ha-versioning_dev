@@ -1,0 +1,12 @@
+id: '1706556459260'
+alias: Turn off living room lights during night
+description: ''
+trigger:
+- at: 00:30
+  platform: time
+condition: []
+action:
+- service: light.turn_off
+  entity_id:
+  - light.woonkamer_lampen
+  - light.eettafel_lamp

@@ -1,0 +1,34 @@
+sequence:
+- action: music_assistant.play_media
+  target:
+    entity_id: media_player.ma_speaker
+  data: '{{ media_query | from_json }}'
+fields:
+  media_query:
+    selector:
+      text: null
+    required: true
+    name: Media query
+    description: 'Field containing a media query in json format. There can be 5 types
+      of input:  A radio station like this: {"media_id": "NPO radio 1", "media_type":
+      "radio" }. Just an artist like this: {"media_id": "artist name", "media_type":
+      "artist"}. An album by an artist like this: {"media_id": "album name", "media_type":"album",
+      "artist": "artist name"}. A track by an artist like this: {"media_id":"track
+      name", "media_type":"track", "artist": "artist name"}. Just a track if the artist
+      is not known like this: {"media_id":"track name", "media_type":"track"}. The
+      media_id and media_type are mandatory!
+
+      Examples: - if the input is "Hells Bells by ACDC", the media_query field should
+      contain:  {"media_id":"Hells Bells", "media_type":"track", "artist":"AC/DC"}
+      - if the input is "NPO Radio een", the media_query will be: {"media_id": "NPO
+      Radio 1", "media_type": "radio"} Do only provide data in the given JSON format
+      in this field!'
+alias: Listen to music or radio
+description: 'This script can be used to listen to music or radio on the speaker.
+  Here is the structured JSON that is required in the media_query field: {"media_id":"name",  "media_type":"type",
+  "artist":"name", "album":"name"}
+
+  In case it is needed, the optional properties "artist" and "album" of the media
+  query field can be used to further restrict the search. E.g., if the input is "Hells
+  Bells by ACDC", then the output should be  {"media_id":"Hells Bells",  "media_type":"track",
+  "artist":"AC/DC"}'

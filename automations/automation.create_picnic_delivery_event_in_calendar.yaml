@@ -1,0 +1,17 @@
+id: '1707053711706'
+alias: Create picnic delivery event in calendar
+description: ''
+trigger:
+- platform: state
+  entity_id:
+  - sensor.picnic_start_of_next_delivery_s_slot
+condition: []
+action:
+- service: google.create_event
+  data:
+    summary: Picnic boodschappen bezorging
+    start_date_time: '{{ states(''sensor.picnic_start_of_next_delivery_s_slot'') }}'
+    end_date_time: '{{ states(''sensor.picnic_end_of_next_delivery_s_slot'') }}'
+  target:
+    entity_id: calendar.home_assistant
+mode: single

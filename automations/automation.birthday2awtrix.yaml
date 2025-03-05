@@ -1,0 +1,38 @@
+id: '1724743255791'
+alias: Birthday2Awtrix
+description: ''
+trigger:
+- platform: calendar
+  event: start
+  offset: 0:0:0
+  entity_id: calendar.ha_birthdays
+  id: 'on'
+- platform: calendar
+  event: end
+  offset: -0:10:0
+  id: 'off'
+  entity_id: calendar.ha_birthdays
+condition: []
+action:
+- choose:
+  - conditions:
+    - condition: trigger
+      id:
+      - 'on'
+    sequence:
+    - action: awtrix.awtrix_956278_push_app_data
+      data:
+        name: birthday
+        data:
+          icon: 14004
+          text: '{{state_attr(''calendar.ha_birthdays'', ''message'') }} - Happy birthday!'
+          rainbow: true
+  - conditions:
+    - condition: trigger
+      id:
+      - 'off'
+    sequence:
+    - action: awtrix.awtrix_956278_push_app_data
+      data:
+        name: birthday
+mode: single

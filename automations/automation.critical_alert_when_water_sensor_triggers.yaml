@@ -1,0 +1,34 @@
+id: '1707054102133'
+alias: Critical alert when water sensor triggers
+description: ''
+trigger:
+- platform: state
+  entity_id:
+  - binary_sensor.washingmachine_leak_1_water_leak
+  to: 'on'
+  from: 'off'
+condition: []
+action:
+- service: switch.turn_off
+  metadata: {}
+  data: {}
+  target:
+    entity_id: switch.washingmachine_plug
+- data:
+    data:
+      push:
+        sound:
+          critical: 1
+          name: US-EN-Daisy-Laundry-Room-Leak.wav
+          volume: 1
+    message: De watersensor bij de wasmachine heeft water gedetecteerd! De wasmachine
+      is uitgezet om de schade te beperken!
+    title: Alarm! Mogelijke lekkage!
+  service: notify.notify_us
+- service: tts.cloud_say
+  data:
+    language: nl-NL
+    entity_id: media_player.speaker
+    message: ALARM! Lekkage bij de wasmachine. Controleer dit onmiddelijk. De wasmachine
+      is uitgezet om de schade te beperken!
+mode: single

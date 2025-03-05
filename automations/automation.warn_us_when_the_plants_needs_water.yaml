@@ -1,0 +1,43 @@
+id: '1707055117832'
+alias: Warn us when the plants needs water
+description: ''
+trigger:
+- platform: time
+  at: '19:00:00'
+condition: []
+action:
+- choose:
+  - conditions:
+    - condition: numeric_state
+      entity_id: sensor.raam_plant_moisture
+      below: '15'
+    sequence:
+    - service: tts.cloud_say
+      data:
+        entity_id: media_player.speaker
+        language: nl-NL
+        message: De plant bij het raam heeft water nodig. Het vochtpercentage is nog
+          maar {{ states("sensor.raam_plant_moisture") }} procent.
+    - service: notify.notify_us
+      data:
+        message: '''De plant bij het raam heeft water nodig. Het vochtpercentage is
+          nog maar {{ states("sensor.raam_plant_moisture") }} procent.'''
+  default: []
+- choose:
+  - conditions:
+    - condition: numeric_state
+      entity_id: sensor.kast_plant_moisture
+      below: '15'
+    sequence:
+    - service: tts.cloud_say
+      data:
+        entity_id: media_player.speaker
+        message: De plant op de kast heeft water nodig. Het vochtpercentage is nog
+          maar {{ states("sensor.kast_plant_moisture") }} procent.
+    - service: notify.notify_us
+      data:
+        message: '''De plant op de kast heeft water nodig. Het vochtpercentage is
+          nog maar {{ states("sensor.kast_plant_moisture") }} procent.'''
+  default: []
+  enabled: false
+mode: single

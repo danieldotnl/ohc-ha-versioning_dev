@@ -1,0 +1,32 @@
+id: '1707054861963'
+alias: 'Switch on front door light after sunset '
+description: ''
+trigger:
+- platform: sun
+  event: sunset
+  offset: 0
+  id: sunset
+- platform: sun
+  event: sunrise
+  offset: 0
+  id: sunrise
+condition: []
+action:
+- choose:
+  - conditions:
+    - condition: trigger
+      id: sunset
+    sequence:
+    - service: light.turn_on
+      data: {}
+      target:
+        entity_id: light.frontdoor
+  - conditions:
+    - condition: trigger
+      id: sunrise
+    sequence:
+    - service: light.turn_off
+      data: {}
+      target:
+        entity_id: light.frontdoor
+mode: single

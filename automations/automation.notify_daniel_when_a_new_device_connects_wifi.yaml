@@ -1,0 +1,14 @@
+id: '1707038995003'
+alias: Notify Daniel when a new device connects wifi
+description: ''
+trigger:
+- platform: event
+  event_type: device_tracker_new_device
+  event_data: {}
+condition: []
+action:
+- service: notify.mobile_app_iphone_drd6vjx62h
+  data:
+    title: New device on wifi
+    message: 'New device: {{trigger.event.data.host_name}} ({{trigger.event.data.entity_id}})'
+mode: queued

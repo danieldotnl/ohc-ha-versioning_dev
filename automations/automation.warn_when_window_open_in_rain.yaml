@@ -1,0 +1,23 @@
+id: '1707055154177'
+alias: Warn when window open in rain
+description: ''
+triggers:
+- entity_id: sensor.mg_rain_speed
+  above: '0.0'
+  trigger: numeric_state
+conditions:
+- condition: state
+  entity_id: binary_sensor.bedroom_window_contact
+  state: 'on'
+actions:
+- data:
+    title: Let op! Het regent en het raam staat nog open!
+    message: Misschien even het raam dicht doen?
+  action: "{% if is_state(\"person.daniel\", \"home\") and is_state(\"person.anca\"\
+    , \"home\") %}\n    notify.notify_us\n{% elif is_state(\"person.daniel\", \"home\"\
+    ) %}\n    notify.mobile_app_iphone_drd6vjx62h\n{% elif is_state(\"person.anca\"\
+    , \"home\") %} \n    notify.mobile_app_iphone\n{% endif %}\n"
+- action: notify.announcements
+  data:
+    message: Attentie! Het regent en het raam op de slaapkamer staat nog open.
+mode: single

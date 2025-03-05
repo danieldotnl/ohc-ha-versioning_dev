@@ -1,0 +1,30 @@
+alias: Describe what happens outside
+description: Use this script to receive an answer for any question about things happening
+  or being outside (in the front yard).
+sequence:
+- action: llmvision.image_analyzer
+  metadata: {}
+  data:
+    provider: 01J6ZD9D4870Q87A59KWJC1J9F
+    model: gpt-4o-mini
+    include_filename: false
+    target_width: 1280
+    detail: high
+    max_tokens: 100
+    temperature: 0.5
+    message: "{% if not question %}\n  Beschrijf kort in het Nederlands wat je ziet\
+      \ in deze beelden van de voortuin. Focus op bewegende objecten, mensen, voertuigen\
+      \ en ongewone dingen als die er zijn. Negeer vaste objecten zoals gebouwen.\n\
+      {% else %}\n  {{ question }}\n{% endif %}"
+    image_entity:
+    - camera.doorbell
+  response_variable: response
+- stop: ''
+  response_variable: response
+fields:
+  question:
+    selector:
+      text: null
+    name: Question
+    description: Provide here the question about something outside.
+    required: true

@@ -1,0 +1,47 @@
+alias: Good morning
+sequence:
+- if:
+  - condition: sun
+    before: sunrise
+    before_offset: '1800'
+  then:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id:
+      - light.eettafel_lamp
+      - light.woonkamer_lampen
+- delay:
+    hours: 0
+    minutes: 1
+    seconds: 0
+    milliseconds: 0
+- service: tts.cloud_say
+  data:
+    entity_id: media_player.speaker
+    language: nl-NL
+    message: "{%- set date = as_timestamp(now()) -%} {% set day = [\"Zondag\", \"\
+      Maandag\", \"Dinsdag\", \"Woensdag\", \"Donderdag\", \"Vrijdag\", \"Zaterdag\"\
+      ] %} {% set month = [\"Januari\", \"Februari\", \"Maart\", \"April\", \"Mei\"\
+      , \"Juni\", \"Juli\", \"Augustus\", \"September\", \"October\", \"November\"\
+      , \"December\"] %} {% set m_id = date | timestamp_custom(\"%m\") | int %} {%\
+      \ set g_id = date | timestamp_custom(\"%w\") | int %} {% set day_of_week = day[g_id]\
+      \ %}  {% set day_of_month = date | timestamp_custom(\"%d\") %} {% set month\
+      \ = month[m_id - 1] %}\nGoedemorgen! Het is vandaag {{ day_of_week }} {{ day_of_month\
+      \ }} {{ month }}. Binnen is het {{ state_attr(\"climate.nefiteasy\", \"current_temperature\"\
+      ) }} en buiten is het {{ states('sensor.mg_temperature') }} graden.\n{% if states('sensor.mg_precipation')\
+      \ | float > 0 %}\n  Het heeft vannacht {{ states('sensor.mg_precipation') }}\
+      \ millimeter geregend.\n{% endif %}\n{% if not is_state('sensor.cyclus_vandaag',\
+      \ 'None') %}\n  {% if is_state('sensor.cyclus_vandaag', 'gft') %}\nVandaag moet\
+      \ de groene container aan de weg gezet worden.\n  {% elif is_state('sensor.cyclus_vandaag',\
+      \ 'papier') %}\nVandaag moet de papier container aan de weg gezet worden.\n\
+      \  {% elif is_state('sensor.cyclus_vandaag', 'pmd') %}\nVandaag moet het plastic\
+      \ buiten gezet worden.\n  {% elif is_state('sensor.cyclus_vandaag', 'restafval')\
+      \ %}\nVandaag moet de grijze container aan de weg gezet worden.\n  {% endif\
+      \ %}\n{% endif %}\nMaak er een mooie dag van!\n"
+mode: single

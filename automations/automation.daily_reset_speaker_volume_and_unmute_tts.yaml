@@ -1,0 +1,14 @@
+id: '1707038773619'
+alias: Daily reset speaker volume and unmute tts
+description: ''
+trigger:
+- platform: time
+  at: '21:30:00'
+condition: []
+action:
+- service: media_player.volume_set
+  data:
+    volume_level: 0.35
+  target:
+    entity_id: media_player.speaker
+mode: single

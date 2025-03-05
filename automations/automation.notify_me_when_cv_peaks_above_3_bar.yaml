@@ -1,0 +1,19 @@
+id: '1707054394071'
+alias: Notify me when CV peaks above 3 bar
+description: ''
+trigger:
+- platform: numeric_state
+  entity_id: sensor.nefiteasy_system_pressure
+  above: '2.5'
+- platform: numeric_state
+  entity_id: sensor.nefiteasy_system_pressure
+  below: '0.5'
+- platform: numeric_state
+  entity_id: sensor.nefiteasy_system_pressure
+  above: '3.5'
+condition: []
+action:
+- service: notify.mobile_app_iphone_drd6vjx62h
+  data:
+    message: De CV druk is boven de 2.5 bar uitgekomen!
+mode: single

@@ -1,0 +1,35 @@
+id: '1707054832228'
+alias: Switch off heating when nobody home
+description: ''
+trigger:
+- entity_id:
+  - person.daniel
+  - person.anca
+  for:
+    hours: 0
+    minutes: 5
+    seconds: 0
+  from: home
+  platform: state
+  to: not_home
+condition:
+- condition: and
+  conditions:
+  - condition: state
+    entity_id: group.us
+    state: not_home
+  - condition: template
+    value_template: '{{ (state_attr(''climate.nefiteasy'', ''temperature'') | float)
+      > states(''input_number.away_temperature'') | float }}'
+action:
+- data_template:
+    entity_id: climate.nefiteasy
+    temperature: '{{ states(''input_number.away_temperature'') }}'
+  service: climate.set_temperature
+- data:
+    title: Verwarming uit!
+    message: Er is niemand meer thuis, dus ik heb de verwarming even wat lager gezet.
+  service_template: "{% if trigger.entity_id == 'person.daniel' %}\n  notify.mobile_app_iphone_drd6vjx62h\n\
+    {% endif %} {% if trigger.entity_id == 'person.anca' %}\n  notify.mobile_app_iphone\n\
+    {% endif %}\n"
+mode: single

@@ -1,0 +1,37 @@
+id: '1705437441560'
+alias: Switch on hall light temporarily on motion
+description: ''
+trigger:
+- platform: state
+  entity_id:
+  - binary_sensor.gang_motion_occupancy
+condition:
+- condition: state
+  entity_id: sun.sun
+  state: below_horizon
+action:
+- choose:
+  - conditions:
+    - condition: state
+      entity_id: binary_sensor.gang_motion_occupancy
+      state: 'on'
+    - condition: time
+      after: 06:00:00
+      before: '23:30:00'
+    sequence:
+    - service: light.turn_on
+      metadata: {}
+      data: {}
+      target:
+        entity_id: light.hall
+  - conditions:
+    - condition: state
+      entity_id: binary_sensor.gang_motion_occupancy
+      state: 'off'
+    sequence:
+    - service: light.turn_off
+      metadata: {}
+      data: {}
+      target:
+        entity_id: light.hall
+mode: single

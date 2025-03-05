@@ -1,0 +1,29 @@
+id: '1706564404305'
+alias: Kitchen switch pushed
+description: ''
+trigger:
+- platform: device
+  domain: mqtt
+  device_id: 4c88aba0c39880f74c831f19903ffe4d
+  type: action
+  subtype: single
+  discovery_id: 0x00158d00023a17bd action_single
+condition: []
+action:
+- choose:
+  - conditions:
+    - condition: time
+      after: '21:00:00'
+      before: 02:00:00
+    sequence:
+    - service: script.going_to_sleep
+      data: {}
+  - conditions:
+    - condition: time
+      after: 06:00:00
+      before: '11:30:00'
+    sequence:
+    - service: script.good_morning
+      data: {}
+  default: []
+mode: single

@@ -1,0 +1,18 @@
+id: '1736343792293'
+alias: 'Update HERE travel time when traveling '
+description: ''
+triggers:
+- trigger: state
+  entity_id:
+  - device_tracker.niro_ev_location
+conditions:
+- condition: state
+  entity_id: device_tracker.niro_ev_location
+  state: not_home
+actions:
+- action: homeassistant.update_entity
+  metadata: {}
+  data:
+    entity_id:
+    - sensor.car2home_duration_in_traffic
+mode: single

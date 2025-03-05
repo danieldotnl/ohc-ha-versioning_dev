@@ -1,0 +1,73 @@
+alias: Create calendar event
+description: 'Creates a new event in our family calendar/agenda (managed through Home
+  Assistant).
+
+  Use this script when someone wants to add an event to the family calendar, such
+  as: - All-day events: vacations, day trips, holidays, days off - Timed events: appointments,
+  meetings, sports activities, social gatherings
+
+  Required information: - Title of the event - Whether it''s an all-day event - Start
+  date (and time if not all-day) - End date (and time if not all-day)
+
+  Examples: - "Add a dentist appointment next Tuesday from 14:00 to 15:00" - "Create
+  an event for our vacation from July 1st to July 15th" - "Add a dinner with friends
+  on Saturday from 18:30 to 22:00" - "Create an event for the school trip next Monday,
+  all day"
+
+  '
+fields:
+  title:
+    name: Event Title
+    description: Name of the event
+    required: true
+    example: Team Meeting
+    selector:
+      text:
+        type: text
+  is_all_day:
+    name: All Day Event
+    description: Whether this is an all-day event
+    required: false
+    default: false
+    example: false
+    selector:
+      boolean: null
+  start_date:
+    name: Start Date
+    description: Start date of the event
+    required: true
+    example: '2024-01-08'
+    selector:
+      date: null
+  start_time:
+    name: Start Time
+    description: Start time (required for non-all-day events)
+    required: false
+    example: '14:00'
+    selector:
+      time: null
+  end_date:
+    name: End Date
+    description: End date
+    required: true
+    example: '2024-01-08'
+    selector:
+      date: null
+  end_time:
+    name: End Time
+    description: End time (required for non-all-day events)
+    required: false
+    example: '15:00'
+    selector:
+      time: null
+sequence:
+- variables:
+    event_data: "{% if is_all_day %}\n  {\n    \"summary\": \"{{ title }}\",\n   \
+      \ \"start_date\": \"{{ start_date }}\",\n    \"end_date\": \"{{ end_date }}\"\
+      \n  }\n{% else %}\n  {\n    \"summary\": \"{{ title }}\",\n    \"start_date_time\"\
+      : \"{{ start_date }} {{ start_time }}\",\n    \"end_date_time\": \"{{ end_date\
+      \ }} {{ end_time }}\"\n  }\n{% endif %}\n"
+- target:
+    entity_id: calendar.home_assistant
+  data: '{{ event_data }}'
+  action: google.create_event

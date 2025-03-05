@@ -1,0 +1,76 @@
+sequence:
+- if:
+  - condition: template
+    value_template: '{{ not is_state(''sensor.active_vacuum_map'', floor) }}'
+  then:
+  - action: vacuum.send_command
+    metadata: {}
+    data:
+      command: load_multi_map
+      params: "{% if floor == 'downstairs' %}\n  2\n{% else %}\n  1\n{% endif %}"
+    target:
+      entity_id: vacuum.robby
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 4
+- action: vacuum.send_command
+  metadata: {}
+  data:
+    command: app_segment_clean
+    params:
+    - repeat: '{{ repeat }}'
+      segments: "{% set ns = namespace (selected_segments=[]) %}\n{% set segment_map\
+        \ = {\n          'gang': 2,\n          'woonkamer': 16,\n          'keuken':\
+        \ 17,\n          'anna kamer': 16,\n          'alex kamer': 17,\n        \
+        \  'badkamer': 18,\n          'slaapkamer': 19,\n          'overloop': 20\n\
+        \        } %} \n        {% for room in roomids %}\n          {% set segment\
+        \ = segment_map[room] %}\n          {% if segment not in ns.selected_segments\
+        \ %}\n            {% set ns.selected_segments = ns.selected_segments + [segment]\
+        \ %}\n          {% endif %}\n        {% endfor %} \n        {{ ns.selected_segments\
+        \ }}"
+  target:
+    entity_id: vacuum.robby
+fields:
+  roomids:
+    selector:
+      select:
+        options:
+        - woonkamer
+        - keuken
+        - gang
+        - alex kamer
+        - anna kamer
+        - slaapkamer
+        - badkamer
+        - overloop
+        multiple: true
+    name: roomids
+    description: Provide a list of rooms that need to be vacuumed. When a floor is
+      mentioned, specify all rooms on that floor separately. It is not possible to
+      mix rooms from different floors.
+    required: true
+  repeat:
+    selector:
+      number:
+        min: 1
+        max: 3
+        step: 1
+    name: repeat
+    description: Specify here how many times the room(s) need to be vacuumed.
+    default: 1
+    required: true
+  floor:
+    selector:
+      select:
+        options:
+        - upstairs
+        - downstairs
+    name: floor
+    description: The floor on which the rooms are that need to be vacuumed. This will
+      be used to select the right map.
+    required: true
+alias: Vacuum floor or rooms
+description: Vacuum clean with robby the robot vacuum, all rooms on a floor or the
+  specified rooms on a floor. The cleaning process should be repeated the given number
+  of times.

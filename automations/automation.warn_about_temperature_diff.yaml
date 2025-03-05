@@ -1,0 +1,37 @@
+id: '1707055050897'
+alias: Warn about temperature diff
+description: ''
+trigger:
+- platform: numeric_state
+  entity_id: sensor.mg_temperature
+  for:
+    hours: 0
+    minutes: 5
+    seconds: 0
+  below: sensor.livingroom_temperature
+condition:
+- condition: numeric_state
+  entity_id: sensor.livingroom_temperature
+  above: '24'
+- condition: state
+  entity_id: group.us
+  state: home
+- condition: template
+  value_template: '{{ trigger.from_state.state != "unavailable" }}'
+action:
+- service: notify.notify_us
+  data:
+    message: 'Het is buiten nu koeler dan binnen: {{ states(''sensor.mg_temperature'')
+      }} graden.'
+    title: Ramen en deuren open!
+- service: tts.cloud_say
+  data:
+    entity_id: media_player.speaker
+    message: Het is buiten nu koeler dan binnen dus doe alle ramen en deuren open
+      zodat het lekker afkoelt!
+- delay:
+    hours: 1
+    minutes: 0
+    seconds: 0
+    milliseconds: 0
+mode: single

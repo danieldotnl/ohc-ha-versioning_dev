@@ -1,0 +1,13 @@
+sequence:
+- action: kia_uvo.start_climate
+  metadata: {}
+  data:
+    duration: 10
+    climate: true
+    defrost: true
+    heating: '3'
+    device_id: 6f20aa58cf367b44586ba7fad06ea196
+    temperature: 20
+alias: Warm up the car
+description: Run this script to switch on the heating and therefore warm up the car
+  and defrost the windows.

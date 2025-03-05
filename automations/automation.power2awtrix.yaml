@@ -1,0 +1,19 @@
+id: '1724422056001'
+alias: Power2Awtrix
+description: Updates the awtrix clock with the current power usage data.
+triggers:
+- seconds: '30'
+  trigger: time_pattern
+conditions: []
+actions:
+- action: awtrix.awtrix_956278_push_app_data
+  data:
+    name: power
+    data:
+      text: '{{ states(''sensor.power_usage'') }} kW
+
+        '
+      icon: "{% if states('sensor.power_usage') | float < 0 %}\n  53194\n{% else %}\n\
+        \  53177\n{% endif %}\n"
+      repeat: 1
+mode: single

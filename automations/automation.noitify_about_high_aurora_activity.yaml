@@ -1,0 +1,16 @@
+id: '1724761568558'
+alias: Notify about high aurora activity
+description: ''
+trigger:
+- platform: numeric_state
+  entity_id:
+  - sensor.current_aurora_activity
+  above: 7
+condition: []
+action:
+- action: notify.mobile_app_iphone_drd6vjx62h
+  data:
+    title: High aurora activity!
+    message: 'Check out the Aurora! Current activity is: {{ states(''sensor.current_aurora_activity'')
+      }} - {{ state_attr(''sensor.current_aurora_activity'', ''activity_name'') }}'
+mode: single

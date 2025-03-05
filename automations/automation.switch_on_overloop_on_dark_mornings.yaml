@@ -1,0 +1,47 @@
+id: '1706126290523'
+alias: Switch on overloop on dark mornings
+description: ''
+triggers:
+- at: 07:00:00
+  id: weekday_trigger
+  trigger: time
+- at: 07:30:00
+  id: weekend_or_vacation_trigger
+  trigger: time
+conditions:
+- condition: template
+  value_template: '{{ ((as_timestamp(utcnow()) - as_timestamp(state_attr(''sun.sun'',
+    ''next_rising''))) / 3600) < 1 }}
+
+    '
+- condition: or
+  conditions:
+  - condition: and
+    conditions:
+    - condition: trigger
+      id: weekday_trigger
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
+  - condition: and
+    conditions:
+    - condition: trigger
+      id: weekend_or_vacation_trigger
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'on'
+actions:
+- target:
+    entity_id: light.overloop_lamp
+  data:
+    brightness: 1
+  action: light.turn_on
+mode: single

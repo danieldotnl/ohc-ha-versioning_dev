@@ -1,0 +1,24 @@
+id: '1707054536217'
+alias: Notify when window is open when leaving
+description: ''
+trigger:
+- entity_id: person.daniel, person.anca
+  from: home
+  platform: state
+  to: not_home
+condition:
+- condition: and
+  conditions:
+  - condition: state
+    entity_id: group.us
+    state: not_home
+  - condition: state
+    entity_id: binary_sensor.bedroom_window_contact
+    state: 'on'
+action:
+- service_template: "{% if trigger.entity_id == 'person.daniel' %}\n  notify.mobile_app_iphone_drd6vjx62h\n\
+    {% endif %} {% if trigger.entity_id == 'person.anca' %}\n  notify.mobile_app_iphone\n\
+    {% endif %}\n"
+  data:
+    message: Er is niemand meer thuis maar het raam staat nog open, snel dicht doen!
+    title: Het raam staat nog open

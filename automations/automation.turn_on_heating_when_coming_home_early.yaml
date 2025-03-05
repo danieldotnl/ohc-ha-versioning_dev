@@ -1,0 +1,34 @@
+id: '1707039098819'
+alias: Turn on heating when coming home early
+description: ''
+triggers:
+- entity_id: person.daniel, person.anca
+  from: not_home
+  to: home
+  alias: Both of us not home
+  trigger: state
+conditions:
+- condition: template
+  value_template: '{{ (state_attr(''climate.nefiteasy'', ''temperature'') | float)
+    < states(''input_number.home_temperature'') | float }}'
+- after: 08:00
+  before: '21:30'
+  condition: time
+actions:
+- data_template:
+    entity_id: climate.nefiteasy
+    temperature: '{{ states(''input_number.home_temperature'') }}'
+  action: climate.set_temperature
+- data:
+    message: Ik heb de verwarming lekker voor je aangezet!
+    title: Welkom thuis!
+  service_template: "{% if trigger.entity_id == 'person.daniel' %}\n  notify.mobile_app_iphone_drd6vjx62h\n\
+    {% endif %} {% if trigger.entity_id == 'person.anca' %}\n  notify.mobile_app_iphone\n\
+    {% endif %}\n"
+- delay: 00:03:00
+- action: notify.announcements
+  metadata: {}
+  data:
+    message: Welkom thuis! Ik heb de verwarming weer aangezet. Het is nu {{ state_attr("climate.nefiteasy",
+      "current_temperature") }} graden.
+mode: single
