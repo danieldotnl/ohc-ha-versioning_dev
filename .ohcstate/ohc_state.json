@@ -60,7 +60,7 @@
     "entity_id": "automation.daily_bulletin",
     "friendly_name": "Daily briefing",
     "is_deleted": false,
-    "last_changed": "2025-03-06T21:32:33.133835Z",
+    "last_changed": "2025-03-06T21:53:46.487908Z",
     "state": "on"
   },
   "automation.daily_reset_speaker_volume_and_unmute_tts": {
