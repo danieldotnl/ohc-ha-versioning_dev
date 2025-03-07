@@ -19,7 +19,7 @@ actions:
 - data:
     data:
       url: /our-home/tech
-    title: Your daily briefing!
+    title: Your daily briefing
     message: "{%- set date = as_timestamp(now()) -%} {% set day = [\"Zondag\", \"\
       Maandag\", \"Dinsdag\", \"Woensdag\", \"Donderdag\", \"Vrijdag\", \"Zaterdag\"\
       ] %} {% set month = [\"Januari\", \"Februari\", \"Maart\", \"April\", \"Mei\"\
